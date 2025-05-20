@@ -45,9 +45,9 @@
           {% if not loop.last %}
                <line 
                x1="{{ 100 + ((x_scale) * loop.index0) }}" 
-               y1="{{ 375 - (mexico_data[loop.index0] | float - 50) * y_scale }}" 
+               y1="{{ 375 - (usa_data[loop.index0] | float - 50) * y_scale }}" 
                x2="{{ 100 + ((x_scale) * (loop.index0 + 1)) }}" 
-               y2="{{ 375 - (mexico_data[loop,index0 + 1] | float - 50) * y_scale }}" 
+               y2="{{ 375 - (usa_data[loop,index0 + 1] | float - 50) * y_scale }}" 
                style="stroke:black; stroke-width:2.5"/>
           {% endif %}
      {% endfor %}
