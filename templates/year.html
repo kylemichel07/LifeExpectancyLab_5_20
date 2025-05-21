@@ -1,16 +1,19 @@
 
 <html>
 <head>
-  <title>Life Expectancy Lab</title>
+  <title>Life Expectancy Lab {{year}}</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <h1>Life Expectancy Lab - (Insert your name here)</h1>
+  <h1>Life Expectancy Lab - Kyle Michel</h1>
+  <h2>Year: {{year}}</h2>
 
   <div id="north_america">
     {% include 'north_america.svg' %}
   </div>
+
+  <h3>In the year {{year}}, Canada experienced</h3>
 
   <footer>
     All data from <a href="https://data.worldbank.org/indicator/SP.DYN.LE00.IN?locations=MX-US-CA"> The World Bank</a>.

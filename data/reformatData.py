@@ -17,7 +17,7 @@ for line in lines[1:]:
     year_values = row[year_start_index:]
 
     year_dict = {
-        year: float(value)
+        year: value.strip()
         for year, value in zip(years, year_values)
         if value.strip()
     }

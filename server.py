@@ -7,46 +7,35 @@ import json
 
 app = Flask(__name__, static_url_path='', static_folder='static')
 
-x_list_canada = []
-x_list_mexico = []
-x_list_usa = []
-
 @app.route('/')
 def index():
-    the_dict = open("data/life_expectancy.json", "r")
-    my_data = json.load(the_dict)
+    f = open("data/life_expectancy.json", "r")
+    data = json.load(f)
+    f.close()
+    average = []
 
-
-    for i in range(1960,2020): #2019, 61 years
-        x_list_canada.append(i)
-
-    for i in range(1960,2021): #2020, 62 years
-        x_list_mexico.append(i)
-
-    for i in range(1960,2020): #2019, 61 years
-        x_list_usa.append(i)
-
-    Canada_y_list = list(my_data["Canada"].values())
-    Mexico_y_list = list(my_data["Mexico"].values())
-    USA_y_list = list(my_data["United States"].values())
-
-    """line_endpoints =[]
-    for i in range(len(years)-1): # make it easy to dynamically generate a line graph
-        start_x = years[i] #generate endpoints for each line segment
-        stop_x = years[i+1]
-        line_endpoints.append([requested_data[start_x],requested_data[stop_x]])"""
-    
-    print(len(x_list_canada))
-    print(len(Canada_y_list))
-    print(len(USA_y_list))
-    print(len(Mexico_y_list))
-    return render_template('index.html', canada_data = Canada_y_list, mexico_data = Mexico_y_list, usa_data = USA_y_list)
-
-
+    for i in data["Mexico"].keys():
+        average.append((float(data["Mexico"][i]) + float(data["United States"][i]) + float(data["Canada"][i]))/3)
+    return render_template('index.html', data = data, years = data["Mexico"].keys(), mexico_data = data["Mexico"].values(), usa_data = data["United States"].values(), canada_data = data["Canada"].values(), average = average)
 
 @app.route('/year')
-def year():
-    requested_year = request.args.get('year')
-    return render_template('year.html')
+def year(): 
+    f = open("data/life_expectancy.json", "r")
+    data = json.load(f)
+    f.close()
+    my_year = request.args.get('year')
+    mexico_val = float(data["Mexico"][my_year])
+    usa_val = float(data["United States"][my_year])
+    canada_val = float(data["Canada"][my_year])
+    every_val = [mexico_val, usa_val, canada_val]
+
+    legend = [(x, 81.92 - x / 16.73) for x in range(0, 500, 50)]
+    country_values = []
+
+    for val in every_val:
+        closest = min(legend, key=lambda pair: abs(val - pair[1]))
+        country_values.append(closest[0])  
+
+    return render_template('year.html', mex = mexico_val, am = usa_val, can = canada_val, mexicoVal = country_values[0], usaVal = country_values[1], canadaVal = country_values[2], year = my_year, data = data, years = data["Mexico"].keys())
 
 app.run(debug=True)
