@@ -12,11 +12,15 @@ def index():
     f = open("data/life_expectancy.json", "r")
     data = json.load(f)
     f.close()
-    average = []
+    avg = []
+
+    print(len(data["Canada"]))
 
     for i in data["Mexico"].keys():
-        average.append((float(data["Mexico"][i]) + float(data["United States"][i]) + float(data["Canada"][i]))/3)
-    return render_template('index.html', data = data, years = data["Mexico"].keys(), mexico_data = data["Mexico"].values(), usa_data = data["United States"].values(), canada_data = data["Canada"].values(), average = average)
+        avg.append((float(data["Mexico"][i]) + float(data["United States"][i]) + float(data["Canada"][i]))/3)
+
+    
+    return render_template('index.html', data = data, years = data["Mexico"].keys(), mexico_data = data["Mexico"].values(), usa_data = data["United States"].values(), canada_data = data["Canada"].values(), average = avg)
 
 @app.route('/year')
 def year(): 
@@ -32,10 +36,10 @@ def year():
     legend = [(x, 81.92 - x / 16.73) for x in range(0, 500, 50)]
     country_values = []
 
-    for val in every_val:
-        closest = min(legend, key=lambda pair: abs(val - pair[1]))
+    for i in every_val:
+        closest = min(legend, key=lambda pair: abs(i - pair[1]))
         country_values.append(closest[0])  
 
-    return render_template('year.html', mex = mexico_val, am = usa_val, can = canada_val, mexicoVal = country_values[0], usaVal = country_values[1], canadaVal = country_values[2], year = my_year, data = data, years = data["Mexico"].keys())
+    return render_template('year.html', me_x = mexico_val, us_a = usa_val, can_ada = canada_val, mexicoVal = country_values[0], usaVal = country_values[1], canadaVal = country_values[2], year = my_year, data = data, years = data["Mexico"].keys())
 
 app.run(debug=True)

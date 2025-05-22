@@ -10,14 +10,14 @@
 
      <g id='lineCAN'> 
      {% for value in canada_data %}                                   <!-- SET THE SCALE TO THE COORDINATES--> 
-     {% set x_scale = (375 - 100) / (2019 - 1960) %} 
+     {% set x_scale = (375 - 100) / (2022 - 1960) %} 
      {% set y_scale = (375 - 100) / (85 - 50) %} 
           {% if not loop.last %}
                <line 
                x1="{{ 100 + ((x_scale) * loop.index0) }}" 
                y1="{{ 375 - (canada_data[loop.index0] | float - 50) * y_scale }}" 
                x2="{{ 100 + ((x_scale) * (loop.index0 + 1)) }}" 
-               y2="{{ 375 - (canada_data[loop,index0 + 1] | float - 50) * y_scale }}" 
+               y2="{{ 375 - (canada_data[loop.index0 + 1] | float - 50) * y_scale }}" 
                style="stroke:black; stroke-width:2.5"/>
           {% endif %}
      {% endfor %}
@@ -25,14 +25,14 @@
 
      <g id='lineMEX'> 
      {% for value in mexico_data %} 
-     {% set x_scale = (375 - 100) / (2020 - 1960) %}
+     {% set x_scale = (375 - 100) / (2022 - 1960) %}
      {% set y_scale = (375 - 100) / (85 - 50) %}   
           {% if not loop.last %}
                <line 
                x1="{{ 100 + ((x_scale) * loop.index0) }}" 
                y1="{{ 375 - (mexico_data[loop.index0] | float - 50) * y_scale }}" 
                x2="{{ 100 + ((x_scale) * (loop.index0 + 1)) }}" 
-               y2="{{ 375 - (mexico_data[loop,index0 + 1] | float - 50) * y_scale }}" 
+               y2="{{ 375 - (mexico_data[loop.index0 + 1] | float - 50) * y_scale }}" 
                style="stroke:black; stroke-width:2.5"/>
           {% endif %}
      {% endfor %}
@@ -40,14 +40,14 @@
 
      <g id='lineUSA'> 
      {% for value in usa_data %}
-     {% set x_scale = (375 - 100) / (2019 - 1960) %}
+     {% set x_scale = (375 - 100) / (2022 - 1960) %}
      {% set y_scale = (375 - 100) / (85 - 50) %}    
           {% if not loop.last %}
                <line 
                x1="{{ 100 + ((x_scale) * loop.index0) }}" 
                y1="{{ 375 - (usa_data[loop.index0] | float - 50) * y_scale }}" 
                x2="{{ 100 + ((x_scale) * (loop.index0 + 1)) }}" 
-               y2="{{ 375 - (usa_data[loop,index0 + 1] | float - 50) * y_scale }}" 
+               y2="{{ 375 - (usa_data[loop.index0 + 1] | float - 50) * y_scale }}" 
                style="stroke:black; stroke-width:2.5"/>
           {% endif %}
      {% endfor %}
